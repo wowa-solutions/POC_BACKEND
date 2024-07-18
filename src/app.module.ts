@@ -9,9 +9,8 @@ import { PaymentModule } from './payment/payment.module';
 import { UserManagementModule } from './user-management/user-management.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { CartModule } from './cart/cart.module';
-import { CartService } from './cart/cart.service';
-import { InvoiceService } from './invoice/invoice.service';
 import { EmailModule } from './email/email.module';
+import { StripeModule } from './stripe/stripe.module';
 
 @Module({
   imports: [
@@ -26,6 +25,7 @@ import { EmailModule } from './email/email.module';
     LoginModule,
     SignupModule,
     EmailModule,
+    StripeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
