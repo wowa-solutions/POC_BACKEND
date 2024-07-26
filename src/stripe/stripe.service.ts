@@ -12,13 +12,16 @@ export class StripeService {
   }
 
   async createPaymentIntent(amount: number, currency: string) {
-    return await this.stripe.paymentIntents.create({
-      amount,
-      currency,
-      automatic_payment_methods: {
-        enabled: true,
-        allow_redirects: 'never',
-      },
-    });
+    try {
+      const paymentIntent = await this.stripe.paymentIntents.create({
+        amount,
+        currency,
+        payment_method_types: ['card', 'paypal'],
+      });
+      return paymentIntent;
+    } catch (error) {
+      // Handle error
+      throw error;
+    }
   }
 }

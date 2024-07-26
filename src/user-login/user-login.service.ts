@@ -7,12 +7,14 @@ import { UserSchema } from './user.entity';
 
 @Injectable()
 export class LoginService {
+
   constructor(
     @InjectModel('User')
     private readonly userModel: Model<UserData>,
   ) {}
 
-  async sendUserLoginData(userData: UserData): Promise<boolean> {
+  async sendUserLoginData(userData: UserData): Promise<UserData> {
+    var isPasswordMatching = false;
     const user = (await this.userModel
       .findOne({
         $or: [{ email: userData.email }, { userName: userData.userName }],
@@ -22,11 +24,42 @@ export class LoginService {
     console.log(user);
 
     if (user) {
-      const isPasswordMatching = await bcrypt.compare(
+      isPasswordMatching = await bcrypt.compare(
         userData.password,
         user.password,
       );
-      return isPasswordMatching;
+    }
+
+    if(isPasswordMatching){
+      const updatedUser = await this.userModel.findByIdAndUpdate(
+        user._id,
+        { loggedin: true },
+        { new: true } // Gibt das aktualisierte Dokument zurück
+      ).exec() as UserData;
+
+      return updatedUser;
+    }
+
+    else{
+      return null;
+    }
+  }
+
+  async sendUserLogoutData(userData: UserData): Promise<boolean> {
+    // const user = (await this.userModel
+    //   .findOne({
+    //     $or: [{ email: userData.email }, { userName: userData.userName }],
+    //   })
+    //   .exec()) as unknown as UserData;
+
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      userData._id,
+      { loggedin: false },
+      { new: false } // Gibt das aktualisierte Dokument zurück
+    ).exec() as UserData;
+
+    if(updatedUser != null){
+      return true
     }
 
     return false;
