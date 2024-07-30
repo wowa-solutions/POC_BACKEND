@@ -34,7 +34,7 @@ export class LoginService {
       const updatedUser = await this.userModel.findByIdAndUpdate(
         user._id,
         { loggedin: true },
-        { new: true } // Gibt das aktualisierte Dokument zurück
+        { new: true }
       ).exec() as UserData;
 
       return updatedUser;
@@ -46,16 +46,10 @@ export class LoginService {
   }
 
   async sendUserLogoutData(userData: UserData): Promise<boolean> {
-    // const user = (await this.userModel
-    //   .findOne({
-    //     $or: [{ email: userData.email }, { userName: userData.userName }],
-    //   })
-    //   .exec()) as unknown as UserData;
-
     const updatedUser = await this.userModel.findByIdAndUpdate(
       userData._id,
       { loggedin: false },
-      { new: false } // Gibt das aktualisierte Dokument zurück
+      { new: false }
     ).exec() as UserData;
 
     if(updatedUser != null){
