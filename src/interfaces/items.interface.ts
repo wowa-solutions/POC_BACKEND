@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { DishType } from '../items/items.entity';
+// import { DishType } from '../items/items.entity';
 
 export interface Item extends Document {
   incredience: string[];
@@ -8,7 +8,7 @@ export interface Item extends Document {
   price: number;
   quantity: number;
   link: string;
-  dishType: DishType;
+  // dishType: DishType;
   inStock: boolean;
   brand: string;
   product: string;

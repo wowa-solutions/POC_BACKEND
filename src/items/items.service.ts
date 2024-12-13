@@ -15,6 +15,14 @@ export class ItemsService {
     return newItem.save();
   }
 
+  // async createItems(itemList: Item[]): Promise<Item[]> {
+  //   itemList.forEach(element => {
+  //     const newItem = new this.itemsModel(element);
+  //     return newItem.save();
+  //   });
+  //   return itemList;
+  // }
+
   async getAllItems(): Promise<Item[]> {
     return this.itemsModel.find().exec();
   }
