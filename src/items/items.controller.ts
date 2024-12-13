@@ -9,8 +9,7 @@ import {
   Patch,
 } from '@nestjs/common';
 import { ItemsService } from './items.service';
-import { ItemSchema } from './items.entity';
-import { Item } from './items.interface';
+import { Item } from '../interfaces/items.interface';
 
 @Controller('items')
 export class ItemsController {

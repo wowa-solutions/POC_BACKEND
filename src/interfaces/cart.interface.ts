@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { Item } from '../items/items.interface';
+import { Item } from '../interfaces/items.interface';
 
 export interface Cart extends Document {
   cartId: string;

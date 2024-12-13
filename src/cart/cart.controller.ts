@@ -9,7 +9,7 @@ import {
   Patch,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { Cart } from './cart.interface';
+import { Cart } from '../interfaces/cart.interface';
 
 @Controller('carts')
 export class CartController {

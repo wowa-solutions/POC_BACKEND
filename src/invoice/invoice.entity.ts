@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Schema, Document } from 'mongoose';
 import { ItemSchema } from 'src/items/items.entity';
-import { Invoice } from './invoice.interface';
+import { Invoice } from '../interfaces/invoice.interface';
 
 export const InvoiceSchema: Schema = new mongoose.Schema({
   invoiceId: { type: String, required: true, unique: true },

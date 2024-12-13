@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Cart } from './cart.interface';
+import { Cart } from '../interfaces/cart.interface';
 
 @Injectable()
 export class CartService {

@@ -9,7 +9,7 @@ import {
   Patch,
 } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
-import { Invoice } from './invoice.interface';
+import { Invoice } from '../interfaces/invoice.interface';
 
 @Controller('invoices')
 export class InvoiceController {

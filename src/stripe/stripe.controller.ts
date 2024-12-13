@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { StripeService } from './stripe.service';
-import { CreatePaymentIntent } from './stripe.interface';
+import { CreatePaymentIntent } from '../interfaces/stripe.interface';
 
 
 @Controller('stripe')

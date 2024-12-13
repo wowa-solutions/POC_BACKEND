@@ -1,4 +1,4 @@
-import { Item } from 'src/items/items.interface';
+import { Item } from './items.interface';
 
 export interface Invoice extends Document {
   invoiceId: string;

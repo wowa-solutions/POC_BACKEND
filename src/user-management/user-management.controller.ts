@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Patch, Post, Query } from '@nestjs/common';
-import { UserData } from 'src/user-login/user-login.interface';
+import { UserData } from 'src/interfaces/user.interface';
 import { UserManagementService } from './user-management.service';
 
 @Controller('users')
