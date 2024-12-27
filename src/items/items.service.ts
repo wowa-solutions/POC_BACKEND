@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Item } from './items.interface';
+import { Item } from './items.dto';
 
 @Injectable()
 export class ItemsService {
