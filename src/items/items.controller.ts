@@ -25,6 +25,16 @@ export class ItemsController {
     return this.itemService.createItem(itemData);
   }
 
+  @Post('itemlist')
+  async createItems(@Body() itemList: Item[]): Promise<boolean> {
+    itemList.forEach(element => {
+      console.log(element)
+      this.itemService.createItem(element)
+    });
+
+    return true
+  }
+
   @Get()
   @ApiOperation({ summary: 'Holt alle Items' })
   async getAllItems(): Promise<Item[]> {
