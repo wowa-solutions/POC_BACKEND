@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import { Schema } from 'mongoose';
-import { Item } from 'src/interfaces/items.interface';
+import { Item } from './items.dto';
 
 // export enum DishType {
 //   PIZZA = 'Pizza',

@@ -48,7 +48,6 @@ export interface UserComment {
   userId: string;
 }
 
-
 // roles
 export interface Employee {
   username: number;
