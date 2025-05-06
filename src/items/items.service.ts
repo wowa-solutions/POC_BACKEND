@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Item } from './items.interface';
+import { Item } from './items.dto';
 
 @Injectable()
 export class ItemsService {
@@ -14,6 +14,14 @@ export class ItemsService {
     const newItem = new this.itemsModel(itemData);
     return newItem.save();
   }
+
+  // async createItems(itemList: Item[]): Promise<Item[]> {
+  //   itemList.forEach(element => {
+  //     const newItem = new this.itemsModel(element);
+  //     return newItem.save();
+  //   });
+  //   return itemList;
+  // }
 
   async getAllItems(): Promise<Item[]> {
     return this.itemsModel.find().exec();
