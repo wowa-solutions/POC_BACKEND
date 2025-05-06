@@ -10,6 +10,8 @@ import { InvoiceModule } from './invoice/invoice.module';
 import { CartModule } from './cart/cart.module';
 import { EmailModule } from './email/email.module';
 import { StripeModule } from './stripe/stripe.module';
+import { PokemonCardModule } from './pokemon-cards/pokemon-card.module';
+import { PokemonSetModule } from './pokemon-sets/pokemon-set.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { StripeModule } from './stripe/stripe.module';
     SignupModule,
     EmailModule,
     StripeModule,
+    PokemonCardModule,
+    PokemonSetModule
   ],
   controllers: [AppController],
   providers: [AppService],
