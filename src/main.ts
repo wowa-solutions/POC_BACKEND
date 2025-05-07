@@ -31,9 +31,12 @@ async function bootstrap() {
   // Swagger-Dokumentation unter /api verfügbar machen
   SwaggerModule.setup('api', app, document);
 
+  // Stelle sicher, dass der Port von der Umgebungsvariable PORT kommt, wenn du auf Heroku bist
+  const port = process.env.PORT || 4000;  // Falls PORT nicht gesetzt ist, standardmäßig 3000 verwenden
+
   // Server starten
-  await app.listen(3000);
-  
-  await app.listen(4000);
+  await app.listen(port);
+  console.log(`Application is running on: http://localhost:${port}`);
 }
+
 bootstrap();
