@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
-import { Schema, Document } from 'mongoose';
+import { Schema } from 'mongoose';
 import { ItemSchema } from 'src/items/items.entity';
 import { PurchaseOrder } from './purchase-order.dto';
-import { User, UserSchema } from 'src/user-login/user-login.entity';
+import { UserSchema } from 'src/user-login/user-login.entity';
 import { InvoiceSchema } from 'src/invoice/invoice.entity';
 
 export const PurchaseOrderSchema: Schema = new mongoose.Schema({

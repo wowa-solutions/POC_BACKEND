@@ -6,11 +6,14 @@ import { PurchaseOrder } from './purchase-order.dto';
 @Injectable()
 export class PurchaseOrderService {
   constructor(
-    @InjectModel('PurchaseOrder') private readonly PurchaseOrderModel: Model<PurchaseOrder>,
+    @InjectModel('PurchaseOrder')
+    private readonly PurchaseOrderModel: Model<PurchaseOrder>,
   ) {}
 
-  async createPurchaseOrder(purchaseOrder: PurchaseOrder): Promise<PurchaseOrder> {
-    const newPurchaseOrder = new this.PurchaseOrderModel(PurchaseOrder);
+  async createPurchaseOrder(
+    purchaseOrder: PurchaseOrder,
+  ): Promise<PurchaseOrder> {
+    const newPurchaseOrder = new this.PurchaseOrderModel(purchaseOrder);
     return newPurchaseOrder.save();
   }
 
@@ -30,8 +33,8 @@ export class PurchaseOrderService {
     id: string,
     updateData: Partial<PurchaseOrder>,
   ): Promise<PurchaseOrder> {
-    return this.PurchaseOrderModel
-      .findByIdAndUpdate(id, updateData, { new: true })
-      .exec();
+    return this.PurchaseOrderModel.findByIdAndUpdate(id, updateData, {
+      new: true,
+    }).exec();
   }
 }
