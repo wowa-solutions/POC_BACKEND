@@ -8,7 +8,9 @@ import {
   IsNumber,
   IsString,
 } from 'class-validator';
+import { Cart } from 'src/cart/cart.dto';
 import { Item } from 'src/items/items.dto'; // Stellen Sie sicher, dass der Pfad korrekt ist
+import { User } from 'src/user-login/user-login.entity';
 
 export class Invoice {
   @ApiProperty({
@@ -20,17 +22,15 @@ export class Invoice {
 
   @ApiProperty({
     example: 'cart123',
-    description: 'Die User-ID, die der Rechnung Rechnung zugeteilt wurde',
+    description: 'Der User, der der Rechnung zugeteilt wurde',
   })
-  @IsMongoId()
-  userId: string;
+  user: User;
 
   @ApiProperty({
     example: 'cart123',
-    description: 'Die Warenkorb-ID, aus der diese Rechnung erstellt wurde',
+    description: 'Der Warenkorb, aus der diese Rechnung erstellt wurde',
   })
-  @IsString()
-  cartId: string;
+  cart: Cart;
 
   @ApiProperty({
     example: 200.5,
