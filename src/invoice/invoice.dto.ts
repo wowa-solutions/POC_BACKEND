@@ -1,37 +1,113 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsDate, IsEnum, IsMongoId, IsNumber, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsDate,
+  IsEnum,
+  IsMongoId,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 import { Item } from 'src/items/items.dto'; // Stellen Sie sicher, dass der Pfad korrekt ist
 
 export class Invoice {
-  @ApiProperty({ example: 'INV-12345', description: 'Die eindeutige Rechnungs-ID' })
-  @IsString()
-  invoiceId: string;
-
-  @ApiProperty({ example: '603d2149f1e5c7b9b0e2f7d2', description: 'Die Benutzer-ID, die diese Rechnung besitzt' })
-  @IsMongoId()
-  userId: string;
-
-  @ApiProperty({ example: 'cart123', description: 'Die Warenkorb-ID, aus der diese Rechnung erstellt wurde' })
-  @IsString()
-  cartId: string;
-
-  @ApiProperty({ type: [Item], description: 'Die Artikel, die in der Rechnung enthalten sind' })
+  @ApiProperty({
+    type: [Item],
+    description: 'Die Artikel, die in der Rechnung enthalten sind',
+  })
   @IsArray()
   items: Item[];
 
-  @ApiProperty({ example: 200.50, description: 'Der Gesamtbetrag der Rechnung' })
-  @IsNumber()
-  totalAmount: number;
+  @ApiProperty({
+    example: 'cart123',
+    description: 'Die User-ID, die der Rechnung Rechnung zugeteilt wurde',
+  })
+  @IsMongoId()
+  userId: string;
 
-  @ApiProperty({ example: '2024-12-27T12:00:00Z', description: 'Das Erstellungsdatum der Rechnung' })
+  @ApiProperty({
+    example: 'cart123',
+    description: 'Die Warenkorb-ID, aus der diese Rechnung erstellt wurde',
+  })
+  @IsString()
+  cartId: string;
+
+  @ApiProperty({
+    example: 200.5,
+    description: 'Der Gesamtbetrag der Rechnung nach Abzug der Steuern',
+  })
+  @IsNumber()
+  totalNet: number;
+
+  @ApiProperty({
+    example: 200.5,
+    description: 'Der Gesamtbetrag der Rechnung mit Steuern',
+  })
+  @IsNumber()
+  totalGross: number;
+
+  @ApiProperty({
+    example: 19.0,
+    description: 'Der Steuersatz in Prozent',
+  })
+  @IsNumber()
+  taxRate: number;
+
+  @ApiProperty({
+    example: '2024-12-27T12:00:00Z',
+    description: 'Das Erstellungsdatum der Rechnung',
+  })
   @IsDate()
   createdAt: Date;
 
-  @ApiProperty({ example: '2024-12-27T12:00:00Z', description: 'Das Datum der letzten Aktualisierung der Rechnung' })
+  @ApiProperty({
+    example: '2024-12-27T12:00:00Z',
+    description: 'Das Datum zu dem bezahlt werden muss',
+  })
   @IsDate()
-  updatedAt: Date;
+  dueDate: Date;
 
-  @ApiProperty({ example: 'pending', description: 'Der Status der Rechnung', enum: ['pending', 'paid', 'cancelled'] })
-  @IsEnum(['pending', 'paid', 'cancelled'])
-  status: 'pending' | 'paid' | 'cancelled';
+  @ApiProperty({
+    example: 'PO00001',
+    description: 'Rechnungsnummer',
+  })
+  @IsNumber()
+  invoiceNumber: number;
+
+  @ApiProperty({
+    example: 'pending',
+    description: 'Der Status der Rechnung',
+    enum: ['pending', 'paid', 'shipped', 'cancelled'],
+  })
+  @IsEnum(['pending', 'paid', 'shipped', 'cancelled'])
+  status: 'pending' | 'paid' | 'shipped' | 'cancelled';
+
+  @ApiProperty({
+    example: 'EUR',
+    description: 'Währung',
+    enum: ['EUR', 'USD', 'GBP'],
+  })
+  @IsEnum(['EUR', 'USD', 'GBP'])
+  currency: 'EUR' | 'USD' | 'GBP';
+
+  @ApiProperty({
+    example: 'false',
+    description: 'Ist die Rechnung bezahlt?',
+  })
+  @IsBoolean()
+  paid: boolean;
+
+  @ApiProperty({
+    example: '2024-12-27T12:00:00Z',
+    description: 'Das Datum, an dem bezahlt wurde',
+  })
+  @IsDate()
+  paidAt: Date;
+
+  @ApiProperty({
+    example: 'Bitte aufpassen, zerbrechlich',
+    description: 'Notiz zu der Rechnung',
+  })
+  @IsString()
+  notes: string;
 }

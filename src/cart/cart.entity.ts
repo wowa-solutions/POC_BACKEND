@@ -2,7 +2,6 @@ import * as mongoose from 'mongoose';
 import { ItemSchema } from 'src/items/items.entity';
 
 export const CartSchema = new mongoose.Schema({
-  cartId: { type: String, required: true, unique: true },
   userId: { type: String, required: true },
   items: { type: [ItemSchema], required: true },
   status: {

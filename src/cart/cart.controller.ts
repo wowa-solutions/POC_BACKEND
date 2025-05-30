@@ -38,10 +38,25 @@ export class CartController {
     type: String,
     description: 'Die ID des Warenkorbs, der abgerufen werden soll',
   })
-  @Get('single')
+  @Get('singleById')
   async getCartById(@Query('id') id: string): Promise<Cart> {
     console.log('Try to get Cart by id:', id);
     return this.cartService.getCartById(id);
+  }
+
+  @ApiOperation({
+    summary: 'Gib einen einzelnen Warenkorb anhand der UserId zurück',
+  })
+  @ApiQuery({
+    name: 'id',
+    required: true,
+    type: String,
+    description: 'Die UserId zu der der Warenkorb zugeordnet ist',
+  })
+  @Get('single')
+  async getCartByUserId(@Query('userId') userId: string): Promise<Cart> {
+    console.log('Try to get Cart by id:', userId);
+    return this.cartService.getCartByUserId(userId);
   }
 
   @ApiOperation({ summary: 'Lösche einen Warenkorb' })
@@ -59,21 +74,27 @@ export class CartController {
 
   @ApiOperation({ summary: 'Aktualisiere einen Warenkorb' })
   @ApiQuery({
-    name: 'id',
+    name: 'userId',
     required: true,
     type: String,
     description: 'Die ID des Warenkorbs, der aktualisiert werden soll',
   })
   @ApiBody({
     type: Cart,
-    description: 'Die Daten, die für das Update des Warenkorbs verwendet werden.',
+    description:
+      'Die Daten, die für das Update des Warenkorbs verwendet werden.',
   })
   @Patch()
   async updateCart(
-    @Query('id') id: string,
+    @Query('userId') userId: string,
     @Body() updateData: Partial<Cart>,
   ): Promise<Cart> {
-    console.log('Try to update Cart by id:', id, 'with data:', updateData);
-    return this.cartService.updateCart(id, updateData);
+    console.log(
+      'Try to update Cart by userId:',
+      userId,
+      'with data:',
+      updateData,
+    );
+    return this.cartService.updateCart(userId, updateData);
   }
 }
