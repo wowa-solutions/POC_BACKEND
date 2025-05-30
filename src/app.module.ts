@@ -12,6 +12,7 @@ import { EmailModule } from './email/email.module';
 import { StripeModule } from './stripe/stripe.module';
 import { PokemonCardModule } from './pokemon-cards/pokemon-card.module';
 import { PokemonSetModule } from './pokemon-sets/pokemon-set.module';
+import { PurchaseOrderModule } from './purchase-order/purchase-order.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PokemonSetModule } from './pokemon-sets/pokemon-set.module';
     UserManagementModule,
     CartModule,
     InvoiceModule,
+    PurchaseOrderModule,
     LoginModule,
     SignupModule,
     EmailModule,
