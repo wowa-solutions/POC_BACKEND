@@ -13,6 +13,7 @@ import { StripeModule } from './stripe/stripe.module';
 import { PokemonCardModule } from './pokemon-cards/pokemon-card.module';
 import { PokemonSetModule } from './pokemon-sets/pokemon-set.module';
 import { PurchaseOrderModule } from './purchase-order/purchase-order.module';
+import { QuestModule } from './questhub/questhub.module';
 
 @Module({
   imports: [
@@ -27,9 +28,10 @@ import { PurchaseOrderModule } from './purchase-order/purchase-order.module';
     LoginModule,
     SignupModule,
     EmailModule,
+    QuestModule,
     StripeModule,
     PokemonCardModule,
-    PokemonSetModule
+    PokemonSetModule,
   ],
   controllers: [AppController],
   providers: [AppService],

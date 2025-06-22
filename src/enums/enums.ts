@@ -3,5 +3,11 @@ export enum CardRarity {
   Uncommon,
   Rare,
   Pokeball,
-  Masterball
+  Masterball,
+}
+
+export enum QuestCategory {
+  FUN = 'FUN',
+  ACTION = 'ACTION',
+  BRAIN = 'BRAIN',
 }
