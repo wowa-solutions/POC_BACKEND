@@ -13,7 +13,7 @@ import { StripeModule } from './stripe/stripe.module';
 import { PokemonCardModule } from './pokemon-cards/pokemon-card.module';
 import { PokemonSetModule } from './pokemon-sets/pokemon-set.module';
 import { PurchaseOrderModule } from './purchase-order/purchase-order.module';
-import { QuestModule } from './questhub/questhub.module';
+import { QuestModule } from './quest/quest.module';
 
 @Module({
   imports: [

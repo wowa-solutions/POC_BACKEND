@@ -9,6 +9,7 @@ export class CartService {
 
   async createCart(cart: Cart): Promise<Cart> {
     const newCart = new this.cartModel(cart);
+    console.log('try to create cart... ', cart);
     return newCart.save();
   }
 
@@ -33,6 +34,11 @@ export class CartService {
   }
 
   async updateCart(userId: string, updateData: Partial<Cart>): Promise<Cart> {
+    // 🧼 _id entfernen, wenn leer oder unerwünscht
+    if (updateData._id === '') {
+      delete updateData._id;
+    }
+
     return await this.cartModel.findOneAndUpdate(
       { userId: userId },
       updateData,

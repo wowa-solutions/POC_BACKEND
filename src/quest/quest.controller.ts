@@ -8,9 +8,9 @@ import {
   Delete,
   Patch,
 } from '@nestjs/common';
-import { QuestService } from './questhub.service';
+import { QuestService } from './quest.service';
 import { ApiOperation, ApiQuery, ApiBody, ApiParam } from '@nestjs/swagger';
-import { QuestDto } from './questhub.dto';
+import { QuestDto } from './quest.dto';
 
 @Controller('Quests')
 export class QuestController {

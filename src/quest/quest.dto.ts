@@ -17,6 +17,9 @@ export class QuestDto {
   @IsString()
   path: string;
 
+  @IsString()
+  userId: string;
+
   @IsBoolean()
   activated: boolean;
 }

@@ -11,5 +11,6 @@ export const Quest = new mongoose.Schema({
   },
   addOn: { type: String, required: true },
   path: { type: String, required: true },
+  userId: { type: String, required: true },
   activated: { type: Boolean, default: false },
 });

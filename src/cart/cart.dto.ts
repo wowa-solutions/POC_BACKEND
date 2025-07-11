@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsDate, IsEnum, IsMongoId, IsNumber } from 'class-validator';
+import {
+  IsArray,
+  IsDate,
+  IsEnum,
+  IsMongoId,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 import { Item } from 'src/items/items.dto'; // Stellen Sie sicher, dass der Pfad korrekt ist
 
 export class Cart {
@@ -9,6 +16,12 @@ export class Cart {
   })
   @IsMongoId() // Validiert, dass es eine gültige MongoDB-ID ist
   userId: string;
+
+  @ApiProperty({
+    example: '603d2149f1e5c7b9b0e2f7d2',
+    description: 'Die Warenkorb-ID',
+  })
+  _id: string;
 
   @ApiProperty({
     type: [Item],
