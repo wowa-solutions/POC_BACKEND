@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoginModule } from './user-login/user-login.module';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ItemsModule } from './items/items.module';
 import { SignupModule } from './user-signup/user-signup.module';
 import { UserManagementModule } from './user-management/user-management.module';
@@ -17,9 +19,19 @@ import { QuestModule } from './quest/quest.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://backend-test:Test123@backend-test.dayvnzs.mongodb.net/',
-    ),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
+    // MongooseModule using ConfigService
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGODB_URI'),
+      }),
+    }),
+
+    // Other modules
     ItemsModule,
     UserManagementModule,
     CartModule,
