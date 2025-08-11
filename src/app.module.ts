@@ -16,6 +16,7 @@ import { PokemonCardModule } from './pokemon-cards/pokemon-card.module';
 import { PokemonSetModule } from './pokemon-sets/pokemon-set.module';
 import { PurchaseOrderModule } from './purchase-order/purchase-order.module';
 import { QuestModule } from './quest/quest.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { QuestModule } from './quest/quest.module';
     UserManagementModule,
     CartModule,
     InvoiceModule,
+    InventoryModule,
     PurchaseOrderModule,
     LoginModule,
     SignupModule,

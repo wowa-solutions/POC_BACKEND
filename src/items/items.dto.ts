@@ -52,6 +52,9 @@ export class Item {
   quantity: number;
 
   @ApiProperty()
+  maxQuantity: number;
+
+  @ApiProperty()
   inStock: boolean;
 
   @ApiProperty()

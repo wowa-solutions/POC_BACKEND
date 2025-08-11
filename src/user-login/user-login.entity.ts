@@ -18,18 +18,24 @@ export class User {
   @Prop({ required: true })
   password: string;
 
-  @ApiProperty({ example: 'Postleitzahl', description: 'Postleitzahl des Users' })
-  @Prop({ required: true })
+  @ApiProperty({
+    example: 'Postleitzahl',
+    description: 'Postleitzahl des Users',
+  })
+  @Prop({ required: false })
   postcode: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   street: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   streetnumber: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   country: string;
+
+  @Prop({ required: false })
+  city: string;
 
   @Prop({ default: false })
   loggedin: boolean;

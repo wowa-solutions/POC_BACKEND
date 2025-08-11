@@ -1,5 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber, IsBoolean, IsEmail, IsOptional, IsEnum, IsDateString, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  IsNumber,
+  IsBoolean,
+  IsEmail,
+  IsOptional,
+  IsEnum,
+  IsDateString,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class UserData {
   @ApiProperty({
@@ -75,6 +84,13 @@ export class UserData {
   })
   @IsString()
   country: string;
+
+  @ApiProperty({
+    example: 'Würzburg',
+    description: 'Stadt des Benutzers',
+  })
+  @IsString()
+  city: string;
 
   @ApiProperty({
     example: true,
