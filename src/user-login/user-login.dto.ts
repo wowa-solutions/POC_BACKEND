@@ -7,15 +7,18 @@ import {
   IsOptional,
   IsEnum,
   IsDateString,
-  IsNotEmpty,
+  IsMongoId,
 } from 'class-validator';
+import { Address } from 'src/interfaces/user.interface';
 
 export class UserData {
   @ApiProperty({
     example: '60d21b4667d0d8992e610c85',
     description: 'Eindeutige ID des Benutzers',
+    required: false,
   })
-  @IsString()
+  @IsMongoId()
+  @IsOptional()
   _id: string;
 
   @ApiProperty({
@@ -44,13 +47,6 @@ export class UserData {
   password: string;
 
   @ApiProperty({
-    example: '12345',
-    description: 'Postleitzahl des Benutzers',
-  })
-  @IsString()
-  postcode: string;
-
-  @ApiProperty({
     example: 'John',
     description: 'Vorname des Benutzers',
   })
@@ -65,32 +61,10 @@ export class UserData {
   lastName: string;
 
   @ApiProperty({
-    example: 'Main Street',
-    description: 'Straße des Benutzers',
+    example: 'Addressformular',
+    description: 'Ein Addressblock',
   })
-  @IsString()
-  street: string;
-
-  @ApiProperty({
-    example: '12B',
-    description: 'Straßenummer des Benutzers',
-  })
-  @IsString()
-  streetnumber: string;
-
-  @ApiProperty({
-    example: 'Germany',
-    description: 'Land des Benutzers',
-  })
-  @IsString()
-  country: string;
-
-  @ApiProperty({
-    example: 'Würzburg',
-    description: 'Stadt des Benutzers',
-  })
-  @IsString()
-  city: string;
+  userAddress: Address;
 
   @ApiProperty({
     example: true,
@@ -143,13 +117,6 @@ export class UserManagement {
   password: string;
 
   @ApiProperty({
-    example: '12345',
-    description: 'Postleitzahl des Benutzers',
-  })
-  @IsString()
-  postcode: string;
-
-  @ApiProperty({
     example: 'John',
     description: 'Vorname des Benutzers',
   })
@@ -162,27 +129,6 @@ export class UserManagement {
   })
   @IsString()
   lastName: string;
-
-  @ApiProperty({
-    example: 'Main Street',
-    description: 'Straße des Benutzers',
-  })
-  @IsString()
-  street: string;
-
-  @ApiProperty({
-    example: '12B',
-    description: 'Straßenummer des Benutzers',
-  })
-  @IsString()
-  streetnumber: string;
-
-  @ApiProperty({
-    example: 'Germany',
-    description: 'Land des Benutzers',
-  })
-  @IsString()
-  country: string;
 
   @ApiProperty({
     example: true,

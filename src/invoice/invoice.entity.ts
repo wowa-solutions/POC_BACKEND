@@ -8,7 +8,6 @@ import { CartSchema } from 'src/cart/cart.entity';
 export const InvoiceSchema: Schema = new mongoose.Schema({
   cart: { type: CartSchema, required: true },
   user: { type: UserSchema, required: true },
-  items: { type: [ItemSchema], required: true },
   totalNet: { type: Number, required: true },
   totalGross: { type: Number, required: true },
   taxRate: { type: Number, required: true },

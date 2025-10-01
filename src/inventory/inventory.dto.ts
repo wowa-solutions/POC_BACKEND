@@ -1,36 +1,17 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsArray,
-  IsBoolean,
-  IsDate,
   IsDateString,
-  IsEnum,
   IsMongoId,
-  IsNumber,
   IsOptional,
   IsString,
-  ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { Item } from 'src/items/items.dto';
-import { User } from 'src/user-login/user-login.entity';
-import { Invoice } from 'src/invoice/invoice.dto';
+import { Address } from 'src/interfaces/user.interface';
 
-export class Inventory {
-  @ApiProperty({ example: '60d21b4667d0d8992e610c85' })
-  @IsMongoId()
-  _id: string;
-
-  @ApiProperty({ type: [Item] })
-  @IsArray()
-  description: 'Der Artikel im Lager'
-  @Type(() => Item)
-  item: Item;
-
-  @ApiProperty({
-    description: 'Name des Lagers',
-  })
-  storageName: string;
+export class InventoryItemDto {
+  @ApiProperty({ example: '682cbd62ea54a88fd4eca2e9' })
+  itemId: string;
 
   @ApiProperty({
     description: 'Aktuelle Menge im Lager',
@@ -38,32 +19,54 @@ export class Inventory {
   quantity: number;
 
   @ApiProperty({
-  description: 'Minimal erlaubte Menge im Lager, bevor bestellt werden muss',
+    description: 'Minimal erlaubte Menge im Lager, bevor bestellt werden muss',
   })
   minQuantity: number;
 
-    @ApiProperty({
+  @ApiProperty({
     description: 'Maximal erlaubte Menge im Lager, die im Lager liegen darf',
   })
   maxQuantity: number;
+}
 
+export class Inventory {
+  @ApiProperty({ example: '60d21b4667d0d8992e610c85' })
+  @IsOptional()
+  @IsMongoId()
+  _id?: string;
+
+  @ApiProperty({ type: [InventoryItemDto] })
+  @IsArray()
+  description: 'Der Artikel im Lagerort';
+  @Type(() => InventoryItemDto)
+  inventoryItems: InventoryItemDto;
+
+  @ApiProperty({
+    description: 'Name des Lagerorts',
+  })
+  storageName: string;
+
+  @ApiProperty({
+    description: 'Addresse des Lagerorts',
+  })
+  storageAddress: Address;
 
   @ApiProperty({
     example: '2024-06-01T12:00:00.000Z',
-    description: 'Erstellungsdatum der Bestellung',
+    description: 'Erstellungsdatum des Lagerorts',
   })
   @IsDateString()
   createdAt: string;
 
   @ApiPropertyOptional({
     example: '2024-06-02T12:00:00.000Z',
-    description: 'Letztes Änderungsdatum der Bestellung',
+    description: 'Letztes Änderungsdatum des Lagerorts',
   })
   @IsOptional()
   @IsDateString()
   updatedAt?: string;
 
-  @ApiPropertyOptional({ example: 'Ware ist leicht brüchig' })
+  @ApiPropertyOptional({ example: 'Notizen zu diesem Lagerort' })
   @IsOptional()
   @IsString()
   notes?: string;

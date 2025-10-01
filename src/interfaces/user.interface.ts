@@ -1,3 +1,5 @@
+import { Date } from 'mongoose';
+
 export interface UserData {
   _id: string;
   email?: string;
@@ -60,4 +62,19 @@ export interface Admin {
   status: string;
   work_area: string;
   roles: number;
+}
+
+export interface CartItem {
+  itemId: string;
+  quantity: number;
+  addedAt: Date;
+}
+
+export interface Address {
+  street: string;
+  streetNumber: string;
+  country: string;
+  city: string;
+  postalCode: string;
+  additionalAddress: string;
 }

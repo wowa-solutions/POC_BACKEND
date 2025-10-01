@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { UserData } from 'src/user-login/user-login.dto';
 
@@ -24,7 +24,7 @@ export class UserManagementService {
   }
 
   async updateUser(
-    id: string,
+    id: ObjectId,
     updateData: Partial<UserData>,
   ): Promise<UserData> {
     if (updateData.password) {

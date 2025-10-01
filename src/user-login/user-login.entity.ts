@@ -1,50 +1,26 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { ApiProperty } from '@nestjs/swagger';
-import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { Schema } from 'mongoose';
+import { UserData } from './user-login.dto';
 
-export type UserDocument = User & Document;
+const AddressSchema = new mongoose.Schema({
+  street: { type: String, required: true },
+  streetNumber: { type: Number, required: true },
+  country: { type: String, required: true },
+  city: { type: String, required: true },
+  postCode: { type: String, required: true },
+  additionalAddress: { type: String, required: false },
+});
 
-@Schema()
-export class User {
-  @ApiProperty({ example: 'Email', description: 'Email des Users' })
-  @Prop({ required: true })
-  email: string;
+export const UserSchema: Schema = new mongoose.Schema({
+  email: { type: String, required: true },
+  userName: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  password: { type: String, required: true },
+  userAddress: { type: AddressSchema, required: true },
+  loggedin: { type: Boolean, required: true },
+  confirmed: { type: Boolean, required: true },
+  role: { type: String, required: true },
+});
 
-  @ApiProperty({ example: 'Username', description: 'Username des Users' })
-  @Prop({ required: true })
-  userName: string;
-
-  @ApiProperty({ example: 'Passwort', description: 'Passwort des Users' })
-  @Prop({ required: true })
-  password: string;
-
-  @ApiProperty({
-    example: 'Postleitzahl',
-    description: 'Postleitzahl des Users',
-  })
-  @Prop({ required: false })
-  postcode: string;
-
-  @Prop({ required: false })
-  street: string;
-
-  @Prop({ required: false })
-  streetnumber: string;
-
-  @Prop({ required: false })
-  country: string;
-
-  @Prop({ required: false })
-  city: string;
-
-  @Prop({ default: false })
-  loggedin: boolean;
-
-  @Prop({ default: false })
-  confirmed: boolean;
-
-  @Prop({ required: true, enum: ['user', 'admin'], default: 'user' })
-  role: string;
-}
-
-export const UserSchema = SchemaFactory.createForClass(User);
+export default mongoose.model<UserData>('User', UserSchema);

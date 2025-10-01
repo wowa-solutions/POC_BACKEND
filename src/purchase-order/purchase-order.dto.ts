@@ -13,8 +13,8 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Item } from 'src/items/items.dto';
-import { User } from 'src/user-login/user-login.entity';
 import { Invoice } from 'src/invoice/invoice.dto';
+import { UserData } from 'src/user-login/user-login.dto';
 
 export enum PurchaseOrderStatus {
   PENDING = 'pending',
@@ -43,7 +43,7 @@ export class PurchaseOrder {
   @ApiProperty({
     description: 'Gesamtes Objekt des Users, der die Bestellung aufgegeben hat',
   })
-  user: User;
+  user: UserData;
 
   @ApiProperty({
     description: 'Invoice Objekt, das dieser Bestellung zugeordnet ist',

@@ -10,7 +10,7 @@ import {
 } from 'class-validator';
 import { Cart } from 'src/cart/cart.dto';
 import { Item } from 'src/items/items.dto'; // Stellen Sie sicher, dass der Pfad korrekt ist
-import { User } from 'src/user-login/user-login.entity';
+import { UserData } from 'src/user-login/user-login.dto';
 
 export class Invoice {
   @ApiProperty({
@@ -24,7 +24,7 @@ export class Invoice {
     example: 'cart123',
     description: 'Der User, der der Rechnung zugeteilt wurde',
   })
-  user: User;
+  user: UserData;
 
   @ApiProperty({
     example: 'cart123',

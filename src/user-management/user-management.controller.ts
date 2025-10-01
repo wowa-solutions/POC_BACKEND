@@ -1,15 +1,29 @@
-import { Body, Controller, Delete, Get, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { UserManagementService } from './user-management.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserData } from 'src/user-login/user-login.dto';
+import { ObjectId } from 'mongoose';
 
-@ApiTags('User Management')  // Definiert einen Tag für die Gruppe der Endpunkte
+@ApiTags('User Management') // Definiert einen Tag für die Gruppe der Endpunkte
 @Controller('users')
 export class UserManagementController {
   constructor(private userManagementService: UserManagementService) {}
 
   @ApiOperation({ summary: 'Alle Benutzerdaten abrufen' })
-  @ApiResponse({ status: 200, description: 'Alle Benutzerdaten wurden erfolgreich abgerufen.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Alle Benutzerdaten wurden erfolgreich abgerufen.',
+  })
   @ApiResponse({ status: 500, description: 'Interner Serverfehler' })
   @Get()
   async getAllUserData(): Promise<UserData[]> {
@@ -18,7 +32,10 @@ export class UserManagementController {
   }
 
   @ApiOperation({ summary: 'Benutzerdaten anhand der ID abrufen' })
-  @ApiResponse({ status: 200, description: 'Benutzerdaten erfolgreich abgerufen.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Benutzerdaten erfolgreich abgerufen.',
+  })
   @ApiResponse({ status: 404, description: 'Benutzer nicht gefunden' })
   @Get('single')
   async getUserById(@Query('id') id: string): Promise<UserData> {
@@ -36,12 +53,18 @@ export class UserManagementController {
   }
 
   @ApiOperation({ summary: 'Benutzerdaten anhand der ID aktualisieren' })
-  @ApiResponse({ status: 200, description: 'Benutzerdaten erfolgreich aktualisiert.' })
-  @ApiResponse({ status: 400, description: 'Ungültige Daten für die Aktualisierung' })
+  @ApiResponse({
+    status: 200,
+    description: 'Benutzerdaten erfolgreich aktualisiert.',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Ungültige Daten für die Aktualisierung',
+  })
   @ApiResponse({ status: 404, description: 'Benutzer nicht gefunden' })
   @Patch(':id')
   async updateUser(
-    @Query('id') id: string,
+    @Param('id') id: ObjectId,
     @Body() updateData: Partial<UserData>,
   ): Promise<UserData> {
     console.log('Try to update user data by id:', id, 'with data:', updateData);
@@ -50,7 +73,10 @@ export class UserManagementController {
 
   @ApiOperation({ summary: 'Benutzer anhand der E-Mail-Adresse abrufen' })
   @ApiResponse({ status: 200, description: 'Benutzer erfolgreich gefunden.' })
-  @ApiResponse({ status: 404, description: 'Benutzer mit dieser E-Mail nicht gefunden' })
+  @ApiResponse({
+    status: 404,
+    description: 'Benutzer mit dieser E-Mail nicht gefunden',
+  })
   @Post('email')
   async getUserByEmail(@Query('email') email: string): Promise<UserData> {
     console.log('Try to find user by email:', email, ' ...');
